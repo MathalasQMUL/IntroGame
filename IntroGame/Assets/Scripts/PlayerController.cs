@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 moveValue;
     public float speed;
+    private int count;
 
     void OnMove(InputValue value)
     {
@@ -20,4 +21,20 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<Rigidbody>().AddForce(movement * speed * Time.fixedDeltaTime);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PickUp")
+        {
+            other.gameObject.SetActive(false);
+            count += 1;
+        }
+    }
+
+    void Start()
+    {
+        count = 0;
+    }
+
+
 }
